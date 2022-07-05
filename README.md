@@ -40,7 +40,7 @@ Doctors and Patients
 - Pre-defined list of patient symptoms that match up to doctor specialties.
 - System matches patients to doctors based on user-selected symptoms.
 
-## Project Requirements
+## Current Project Requirements
 
 **Main Requirements**:
 

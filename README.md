@@ -14,31 +14,31 @@ Doctors and Patients
 
 **Main Requirements**:
 
-    - The system should create a Hospital with a name property provided by the
-      user.
-    - The system should create 3 doctors, each with a name and specialty
-      provided by the user.
-      - The specialty is user-definable, but good examples are:
-        - Dermatology
-        - Pediatrics
-        - Radiology
-        - ...
-    - The system should establish that the doctors work at the system's hospital.
-    - The system should ask the user to create 5 patients and match each patient
-      to a doctor based on the specialty they need.
-    - When the system is done collecting input from the user and building the
-      world, it should "display" the world to the user (text-based display on
-      the command line).
-    - The system must handle invalid input from the user (at all points where
-      input is gathered from the user).
+- The system should create a Hospital with a name property provided by the
+  user.
+- The system should create 3 doctors, each with a name and specialty
+  provided by the user.
+  - The specialty is user-definable, but good examples are:
+    - Dermatology
+    - Pediatrics
+    - Radiology
+    - ...
+- The system should establish that the doctors work at the system's hospital.
+- The system should ask the user to create 5 patients and match each patient
+  to a doctor based on the specialty they need.
+- When the system is done collecting input from the user and building the
+  world, it should "display" the world to the user (text-based display on
+  the command line).
+- The system must handle invalid input from the user (at all points where
+  input is gathered from the user).
 
 **Stretch goals**:
 
-    - User-defined number of doctors.
-    - Pre-defined list of doctor specialties that the user must select from.
-    - User-defined number of patients.
-    - Pre-defined list of patient symptoms that match up to doctor specialties.
-    - System matches patients to doctors based on user-selected symptoms.
+- User-defined number of doctors.
+- Pre-defined list of doctor specialties that the user must select from.
+- User-defined number of patients.
+- Pre-defined list of patient symptoms that match up to doctor specialties.
+- System matches patients to doctors based on user-selected symptoms.
 
 ## Project Requirements
 
@@ -72,17 +72,17 @@ Doctors and Patients
 
 **Stretch goals**:
 
-    - Randomize whether patients get better with each round of treatment.
-      Possibilities are:
-      - User gets better by the expected gain from each treatment.
-      - User's health index does not change (the treatment has no impact).
-      - User gets worse by the expected gain from each treatment.
-    - Display a "health index" ascii-based progress bar every time the patient
-      goes through a round of treatment.
-      - E.g.: ========= 90% health
-    - Create different hospitals, where each hospital has its own set of doctors
-      with unique specialties that other hospitals do not have - Assign patients
-      to hospitals and doctors based on their ailments.
+- Randomize whether patients get better with each round of treatment.
+  Possibilities are:
+  - User gets better by the expected gain from each treatment.
+  - User's health index does not change (the treatment has no impact).
+  - User gets worse by the expected gain from each treatment.
+- Display a "health index" ascii-based progress bar every time the patient
+  goes through a round of treatment.
+  - E.g.: ========= 90% health
+- Create different hospitals, where each hospital has its own set of doctors
+  with unique specialties that other hospitals do not have - Assign patients
+  to hospitals and doctors based on their ailments.
 
 ## Getting Started
 

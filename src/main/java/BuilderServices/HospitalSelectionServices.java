@@ -2,10 +2,12 @@ package BuilderServices;
 
 import Entities.Hospital;
 import IOServices.IOService;
+import IOServices.JsonIOService;
 import InputServices.UserInputService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
+import java.io.IOException;
 
 public class HospitalSelectionServices {
 
@@ -13,12 +15,12 @@ public class HospitalSelectionServices {
     private UserInputService userInputService;
     private IOService ioService;
 
-    public HospitalSelectionServices(UserInputService userInputService, IOService ioService) {
+    public HospitalSelectionServices(UserInputService userInputService) {
         this.userInputService = userInputService;
-        this.ioService = ioService;
+        this.ioService = new JsonIOService();
     }
 
-    public Hospital selectHospital(){
+    public Hospital selectHospital() throws IOException {
         System.out.println("WELCOME!");
         System.out.println("1.Import the existing hospital");
         System.out.println("2.Create a new hospital");
@@ -46,19 +48,16 @@ public class HospitalSelectionServices {
     }
 
 
-    public Hospital importHospital() {
+    public Hospital importHospital() throws IOException {
 
-        Hospital restoredHospital = null;
-        try{
+        Hospital hospital =  ioService.parseFile("hospital.json");
 
-            restoredHospital = new ObjectMapper().readValue(new File( "hospital.json"), Hospital.class);
-
-        } catch (Exception e){
-            System.out.println("Hospital does not exist. Redirecting to create a new one....");
+        if(hospital == null){
+            System.out.println("Hospital does not exist, redirecting you to build a new hospital....");
             return buildNewHospital();
         }
-        return restoredHospital;
 
+        return hospital;
     }
 
 

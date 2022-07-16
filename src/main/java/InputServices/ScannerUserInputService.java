@@ -107,7 +107,7 @@ public class ScannerUserInputService implements UserInputService {
 
     @Override
     public Patient getPatient(Map<Integer,Patient> patientList) {
-        System.out.println("Please select the patient for treatment");
+        System.out.println("Please select the patient ID no for treatment");
         for(int number : patientList.keySet()){
             System.out.println(number+". "+patientList.get(number).getName());
         }
@@ -124,8 +124,14 @@ public class ScannerUserInputService implements UserInputService {
             return getPatient(patientList);
         }
 
-        return patientList.get(option);
 
+        Patient patient = patientList.get(option);
+        if(patient == null){
+            System.out.println("That patient ID does not exist. Please type correct ID number");
+            return  getPatient(patientList);
+        }
+
+        return  patient;
     }
 
     @Override

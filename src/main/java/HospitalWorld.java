@@ -1,7 +1,6 @@
-import BuilderServices.DoctorBuilderService;
-import BuilderServices.HospitalBuilderService;
-import BuilderServices.PatientBuilderService;
+import BuilderServices.*;
 import Entities.Hospital;
+import IOServices.IOService;
 import InputServices.ScannerUserInputService;
 import InputServices.SysoutUserOutputService;
 import InputServices.UserInputService;
@@ -12,7 +11,20 @@ public class HospitalWorld {
         UserOutputService userOutputService = new SysoutUserOutputService();
         try (UserInputService userInputService = new ScannerUserInputService(userOutputService);) {
 
-            System.out.println("Hospital is ready!");
+            HospitalSelectionServices hospitalSelectionServices = new HospitalSelectionServices(userInputService);
+            Hospital hospital = hospitalSelectionServices.selectHospital();
+
+            System.out.println("Hospital is ready!!");
+
+            PatientSelectionService patientSelectionService = new PatientSelectionService(userInputService);
+            PatientBuilderService patientBuilderService = new PatientBuilderService(userInputService);
+
+
+            PatientServices patientServices = new PatientServices(patientBuilderService,userInputService,patientSelectionService,hospital);
+            patientServices.choosePatientService();
+
+
+
 
 
 

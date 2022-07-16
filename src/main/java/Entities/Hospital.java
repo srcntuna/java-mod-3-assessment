@@ -1,8 +1,9 @@
 package Entities;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Hospital {
+public class Hospital implements Serializable {
     private String name;
     private Map<String, Set<Doctor>> specialtyToDoctors;
 
@@ -46,10 +47,35 @@ public class Hospital {
             System.out.println("Sorry no doctor exist in this speciality! Please go to another hospital");
             return;
         }
+        patient.setPatientID(patientID);
         chosenDoctor.addPatient(patient);
+        patient.setAssignedDoctor(chosenDoctor);
         allPatients.put(patientID,patient);
         patientID++;
         System.out.println(patient.getName()+" has been to added to Doctor "+chosenDoctor.getName()+" list in "+chosenDoctor.getSpecialty().getName()+" department");
+
+    }
+
+    public void removePatient(Patient patient){
+
+        int patientID = patient.getPatientID();
+
+        String assignedDoctorName = patient.getAssignedDoctor().getName();
+
+        Set<Doctor> doctorsWithThatSpecialty = specialtyToDoctors.get(patient.getSpeciality());
+
+        //from doctors list
+        for(Doctor doctor : doctorsWithThatSpecialty){
+            String currDoctorName = doctor.getName();
+            if(currDoctorName.equals(assignedDoctorName)){
+                int patientIndex = doctor.getPatients().indexOf(patient);
+                doctor.getPatients().remove(patientIndex);
+                System.out.println(patient.getName()+" has been removed from hospital...");
+            }
+        }
+
+        //from the whole list of patients
+        allPatients.remove(patient);
 
     }
 
@@ -103,9 +129,5 @@ public class Hospital {
         this.allPatients = allPatients;
     }
 
-    @Override
-    public String toString() {
-        return "Hospital [name=" + name + ", specialtyToDoctors=" + specialtyToDoctors + "]";
-    }
 
 }

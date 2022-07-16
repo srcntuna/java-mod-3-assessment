@@ -4,9 +4,16 @@ public class Patient {
     private String name;
 
     private Ailment ailment;
+
+
+
     private int healthIndex;
 
 
+
+    private Doctor assignedDoctor;
+
+    private int patientID;
 
     private String speciality;
     private boolean isHealed;
@@ -17,6 +24,8 @@ public class Patient {
         this.ailment = ailment;
         this.healthIndex = ailment.getStartingHealthIndex();
         this.isHealed = false;
+        this.patientID = 0;
+        this.assignedDoctor = null;
     }
 
     public String getName() {
@@ -45,8 +54,25 @@ public class Patient {
 
     }
 
-    @Override
-    public String toString() {
-        return "Patient{" + "name='" + name + '\'' + ", ailment=" + ailment + ", healthIndex=" + healthIndex + ", isHealed=" + isHealed + '}';
+    public Doctor getAssignedDoctor() {
+        return assignedDoctor;
     }
+
+    public void setAssignedDoctor(Doctor assignedDoctor) {
+        this.assignedDoctor = assignedDoctor;
+    }
+
+    public int getHealthIndex() {
+        return healthIndex;
+    }
+
+    public int getPatientID() {
+        return patientID;
+    }
+
+    public void setPatientID(int patientID) {
+        this.patientID = patientID;
+    }
+
+
 }

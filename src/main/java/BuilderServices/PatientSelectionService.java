@@ -16,7 +16,6 @@ public class PatientSelectionService {
     }
 
     public Patient selectPatient(Map<Integer,Patient> patientList) {
-        String name = userInputService.getUserInput("What's the doc's name?");
 
         Patient patient = userInputService.getPatient(patientList);
 

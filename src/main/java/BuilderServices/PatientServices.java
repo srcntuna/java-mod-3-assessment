@@ -42,18 +42,14 @@ public class PatientServices {
 
             }else if(option == 2){
                 Patient patient = patientSelectionService.selectPatient(hospital.getAllPatients());
-                Doctor doctor = patient.getAssignedDoctor();
                 System.out.println(patient.getName()+" had "+patient.getHealthIndex()+" points");
-                System.out.println(patient.getName()+"'s doctor "+doctor.getName()+" has "+doctor.getHealingPower()+" points...");
-                patient.receiveTreatment(doctor.getHealingPower());
+                System.out.println("10 points is loading ......");
+                patient.receiveTreatment(10);
                 System.out.println(patient.getName()+" health index is now "+patient.getHealthIndex());
                 if(patient.getHealthIndex()>= 100){
                     hospital.removePatient(patient);
                 }
             }else{
-                System.out.println("GOODBYEEEE");
-                ioService.writeToFile("hospital.json",hospital);
-                System.out.println("GOODBYEEEE22222");
 
               break;
 

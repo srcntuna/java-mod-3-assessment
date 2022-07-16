@@ -1,5 +1,8 @@
 package Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
 public class Patient {
     private String name;
 
@@ -9,14 +12,14 @@ public class Patient {
 
     private int healthIndex;
 
-
-
-    private Doctor assignedDoctor;
-
     private int patientID;
 
     private String speciality;
     private boolean isHealed;
+
+    public Patient(){
+
+    }
 
     public Patient(String name, Ailment ailment) {
         this.name = name;
@@ -25,7 +28,7 @@ public class Patient {
         this.healthIndex = ailment.getStartingHealthIndex();
         this.isHealed = false;
         this.patientID = 0;
-        this.assignedDoctor = null;
+
     }
 
     public String getName() {
@@ -54,13 +57,7 @@ public class Patient {
 
     }
 
-    public Doctor getAssignedDoctor() {
-        return assignedDoctor;
-    }
 
-    public void setAssignedDoctor(Doctor assignedDoctor) {
-        this.assignedDoctor = assignedDoctor;
-    }
 
     public int getHealthIndex() {
         return healthIndex;

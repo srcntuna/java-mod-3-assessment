@@ -28,10 +28,10 @@ public class Hospital implements Serializable {
 
     public void addDoctor(Doctor doctor) {
 
-        Speciality doctorSpeciality = doctor.getSpecialty();
+        String doctorSpeciality = doctor.getSpecialty();
 
         for(String speciality : specialtyToDoctors.keySet()){
-            if(speciality.equals(doctorSpeciality.getName())  ){
+            if(speciality.equals(doctorSpeciality)  ){
                 specialtyToDoctors.get(speciality).add(doctor);
                 System.out.println(doctor.getName()+" has been added to " + speciality+" department");
             }
@@ -49,10 +49,10 @@ public class Hospital implements Serializable {
         }
         patient.setPatientID(patientID);
         chosenDoctor.addPatient(patient);
-        patient.setAssignedDoctor(chosenDoctor);
+
         allPatients.put(patientID,patient);
         patientID++;
-        System.out.println(patient.getName()+" has been to added to Doctor "+chosenDoctor.getName()+" list in "+chosenDoctor.getSpecialty().getName()+" department");
+        System.out.println(patient.getName()+" has been to added to Doctor "+chosenDoctor.getName()+" list in "+chosenDoctor.getSpecialty()+" department");
 
     }
 
@@ -60,18 +60,20 @@ public class Hospital implements Serializable {
 
         int patientID = patient.getPatientID();
 
-        String assignedDoctorName = patient.getAssignedDoctor().getName();
 
         Set<Doctor> doctorsWithThatSpecialty = specialtyToDoctors.get(patient.getSpeciality());
 
         //from doctors list
         for(Doctor doctor : doctorsWithThatSpecialty){
-            String currDoctorName = doctor.getName();
-            if(currDoctorName.equals(assignedDoctorName)){
-                int patientIndex = doctor.getPatients().indexOf(patient);
-                doctor.getPatients().remove(patientIndex);
-                System.out.println(patient.getName()+" has been removed from hospital...");
+            List<Patient> doctorList = doctor.getPatients();
+            for(Patient currPatient : doctorList){
+                if(currPatient.getPatientID() == patientID){
+                    doctorList.remove(currPatient);
+                    System.out.println(patient.getName()+" has been removed from hospital...");
+                };
+
             }
+
         }
 
         //from the whole list of patients
@@ -129,5 +131,8 @@ public class Hospital implements Serializable {
         this.allPatients = allPatients;
     }
 
-
+    @Override
+    public String toString() {
+        return "Hospital{" + "name='" + name + '\'' + ", specialtyToDoctors=" + specialtyToDoctors + ", patientID=" + patientID + ", allPatients=" + allPatients + '}';
+    }
 }

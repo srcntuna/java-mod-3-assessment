@@ -14,12 +14,15 @@ public class JsonIOService implements IOService {
 
     public void writeToFile(String fileName, Hospital hospital) throws Exception {
 
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.writeValue(new File("hospital.json"), hospital);
-
-        String json = new ObjectMapper().writeValueAsString(hospital);
-        System.out.println(json);
-
+  FileWriter fileWriter = null;
+                try {
+                    fileWriter = new FileWriter(fileName, true);
+                    String json = new ObjectMapper().writeValueAsString(hospital);
+                    fileWriter.write(json);
+                    fileWriter.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
 
     }
@@ -34,7 +37,7 @@ public class JsonIOService implements IOService {
             restoredHospital = new ObjectMapper().readValue(new File( "hospital.json"), Hospital.class);
 
         } catch (Exception e){
-            return restoredHospital;
+            e.printStackTrace();
         }
         return restoredHospital;
     }

@@ -7,6 +7,7 @@ import InputServices.UserInputService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class HospitalSelectionServices {
@@ -50,9 +51,12 @@ public class HospitalSelectionServices {
 
     public Hospital importHospital() throws IOException {
 
-        Hospital hospital =  ioService.parseFile("hospital.json");
+        System.out.println("hey here!");
 
-        if(hospital == null){
+      Hospital hospital = null;
+        try{
+            hospital = ioService.parseFile("hospital.json");
+        }catch (Exception e){
             System.out.println("Hospital does not exist, redirecting you to build a new hospital....");
             return buildNewHospital();
         }

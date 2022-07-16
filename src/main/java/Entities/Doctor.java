@@ -1,6 +1,8 @@
 package Entities;
 
 import Enums.Specialities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -12,21 +14,24 @@ public class Doctor {
 
 
 
-    private int healingPower;
-
-    private Speciality speciality;
+    private String speciality;
     private boolean registered;
-
 
 
     private List<Patient> patients;
 
-    public Doctor(String name, Speciality speciality) {
+    public Doctor(){
+
+    }
+
+
+
+    public Doctor(String name, String speciality) {
         this.name = name;
         this.speciality = speciality;
         this.registered = true;
         this.patients = new ArrayList<>();
-        this.healingPower = 5 + (int)(Math.random() * ((30 - 5) + 1));
+
 
     }
 
@@ -34,7 +39,7 @@ public class Doctor {
         return name;
     }
 
-    public Speciality getSpecialty() {
+    public String getSpecialty() {
         return speciality;
     }
 
@@ -54,8 +59,16 @@ public class Doctor {
         return patients;
     }
 
-    public int getHealingPower() {
-        return healingPower;
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
+    }
+
+    public void setRegistered(boolean registered) {
+        this.registered = registered;
+    }
+
+    public void setPatients(List<Patient> patients) {
+        this.patients = patients;
     }
 
 

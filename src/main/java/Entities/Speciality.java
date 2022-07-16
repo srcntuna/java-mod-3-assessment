@@ -10,7 +10,6 @@ public class Speciality {
     private HashSet<Ailment> associatedAilments;
 
 
-
     public Speciality(String name, int numOfTreatmentsReq) {
         this.name = name;
         this.numOfTreatmentsReq = numOfTreatmentsReq;

@@ -1,6 +1,7 @@
 import BuilderServices.*;
 import Entities.Hospital;
 import IOServices.IOService;
+import IOServices.JsonIOService;
 import InputServices.ScannerUserInputService;
 import InputServices.SysoutUserOutputService;
 import InputServices.UserInputService;
@@ -22,6 +23,11 @@ public class HospitalWorld {
 
             PatientServices patientServices = new PatientServices(patientBuilderService,userInputService,patientSelectionService,hospital);
             patientServices.choosePatientService();
+
+            IOService ioService = new JsonIOService();
+            ioService.writeToFile("hospital.json",hospital);
+
+            return;
 
 
 

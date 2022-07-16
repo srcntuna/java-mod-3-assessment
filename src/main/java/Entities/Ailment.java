@@ -9,6 +9,10 @@ public class Ailment {
 
     private String speciality;
 
+    public Ailment(){
+
+    }
+
     public Ailment(int startingHealthIndex, String name, String speciality) {
         this.startingHealthIndex = startingHealthIndex;
         this.name = name;

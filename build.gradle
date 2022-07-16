@@ -10,9 +10,15 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.4'
+    implementation 'com.github.lbovolini:ObjectMapper:0.2.3'
+    implementation 'com.konghq:unirest-objectmapper-jackson:3.13.10'
+    implementation 'com.xellitix.commons:jackson-utils:0.2.0'
+    implementation 'com.fasterxml:jackson-xml-databind:0.6.2'
+    implementation 'io.liftwizard:liftwizard-bundle-object-mapper:0.25.0'
+    implementation 'com.github.lbovolini:object-mapper:1.1.68'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
 }
 
 test {

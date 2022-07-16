@@ -21,7 +21,7 @@ public class HospitalSelectionServices {
         this.ioService = new JsonIOService();
     }
 
-    public Hospital selectHospital() throws IOException {
+    public Hospital selectHospital() throws Exception {
         System.out.println("WELCOME!");
         System.out.println("1.Import the existing hospital");
         System.out.println("2.Create a new hospital");
@@ -49,17 +49,17 @@ public class HospitalSelectionServices {
     }
 
 
-    public Hospital importHospital() throws IOException {
+    public Hospital importHospital() throws Exception {
 
-        System.out.println("hey here!");
 
-      Hospital hospital = null;
-        try{
-            hospital = ioService.parseFile("hospital.json");
-        }catch (Exception e){
-            System.out.println("Hospital does not exist, redirecting you to build a new hospital....");
-            return buildNewHospital();
-        }
+
+            Hospital hospital = ioService.parseFile("hospital.json");
+
+            if(hospital == null){
+                System.out.println("Hospital does not exist, redirecting you to build a new hospital....");
+                return buildNewHospital();
+
+            }
 
         return hospital;
     }

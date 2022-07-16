@@ -1,6 +1,7 @@
 package Entities;
 
 import Enums.Specialities;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -39,7 +40,7 @@ public class Doctor {
         return name;
     }
 
-    public String getSpecialty() {
+    public String getSpeciality() {
         return speciality;
     }
 
@@ -51,6 +52,7 @@ public class Doctor {
         this.patients.add(patient);
     }
 
+    @JsonIgnore
     public int getPatientCount() {
         return this.patients.size();
     }

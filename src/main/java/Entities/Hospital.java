@@ -28,7 +28,7 @@ public class Hospital implements Serializable {
 
     public void addDoctor(Doctor doctor) {
 
-        String doctorSpeciality = doctor.getSpecialty();
+        String doctorSpeciality = doctor.getSpeciality();
 
         for(String speciality : specialtyToDoctors.keySet()){
             if(speciality.equals(doctorSpeciality)  ){
@@ -52,7 +52,7 @@ public class Hospital implements Serializable {
 
         allPatients.put(patientID,patient);
         patientID++;
-        System.out.println(patient.getName()+" has been to added to Doctor "+chosenDoctor.getName()+" list in "+chosenDoctor.getSpecialty()+" department");
+        System.out.println(patient.getName()+" has been to added to Doctor "+chosenDoctor.getName()+" list in "+chosenDoctor.getSpeciality()+" department");
 
     }
 

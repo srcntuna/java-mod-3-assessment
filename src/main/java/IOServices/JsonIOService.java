@@ -37,7 +37,8 @@ public class JsonIOService implements IOService {
             restoredHospital = new ObjectMapper().readValue(new File( "hospital.json"), Hospital.class);
 
         } catch (Exception e){
-            return restoredHospital;
+            e.printStackTrace();
+            return null;
         }
         return restoredHospital;
     }

@@ -66,8 +66,10 @@ public class Hospital implements Serializable {
         //from doctors list
         for(Doctor doctor : doctorsWithThatSpecialty){
             List<Patient> doctorList = doctor.getPatients();
-            for(Patient currPatient : doctorList){
-                if(currPatient.getPatientID() == patientID){
+            for(int i =0 ;i<doctorList.size();i++){
+                Patient currPatient = doctorList.get(i);
+                int currPatientID = currPatient.getPatientID();
+                if(currPatientID == patientID){
                     doctorList.remove(currPatient);
                     System.out.println(patient.getName()+" has been removed from hospital...");
                 };

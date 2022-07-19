@@ -1,6 +1,7 @@
 package Entities;
 
 import Deserializer.ArrayToMapDeserializer;
+import Deserializer.MapSerializer;
 import Deserializer.MapToArraySerializer;
 import Deserializer.MyCustomDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -12,8 +13,8 @@ import java.util.*;
 public class Hospital implements Serializable {
     private String name;
 
-    @JsonSerialize(using = MapToArraySerializer.class)
-    private Map<Speciality, Set<Doctor>> specialtyToDoctors;
+    @JsonSerialize(using = MapSerializer.class)
+    private Map<String, Map<String,List<Object>>> specialtyDetails;
 
 
     private int patientID;
@@ -28,7 +29,7 @@ public class Hospital implements Serializable {
 
     public Hospital(String name) {
         this.name = name;
-        this.specialtyToDoctors = new HashMap<>();
+        this.specialtyDetails = new HashMap<>();
 
 
     }
@@ -39,23 +40,23 @@ public class Hospital implements Serializable {
 
     public void addDoctor(Doctor doctor) {
 
-        Speciality doctorSpeciality = doctor.getSpeciality();
+        String doctorSpeciality = doctor.getSpeciality();
 
 
-        for(Speciality speciality : specialtyToDoctors.keySet()){
+        for(String speciality : specialtyDetails.keySet()){
 
             if(speciality.equals(doctorSpeciality)){
-
-                specialtyToDoctors.get(speciality).add(doctor);
-                System.out.println(doctor.getName()+" has been added to " + speciality.getName()+" department");
+                specialtyDetails.get(doctorSpeciality).get("doctors").add(doctor);
+                System.out.println(doctor.getName()+" has been added to " + speciality+" department");
             }
+
         }
 
     }
 
     public void addPatient(Patient patient) {
 
-        Set<Doctor> doctorsWithThatSpecialty = specialtyToDoctors.get(patient.getSpeciality());
+        List<Object> doctorsWithThatSpecialty = specialtyDetails.get(patient.getSpeciality()).get("doctors");
         Doctor chosenDoctor = findDoctorWithShortestQueue(doctorsWithThatSpecialty);
         if(chosenDoctor == null){
             System.out.println("Sorry no doctor exist in this speciality! Please go to another hospital");
@@ -107,12 +108,12 @@ public class Hospital implements Serializable {
     }
 
 
-    private Doctor findDoctorWithShortestQueue(Set<Doctor> doctors) {
+    private Doctor findDoctorWithShortestQueue(List<Object> doctors) {
 
 
 
-        Doctor chosenDoctor = null;
-        for (Doctor doctor : doctors) {
+        Object chosenDoctor = null;
+        for (Object doctor : doctors) {
             if (chosenDoctor == null) {
                 chosenDoctor = doctor;
             } else if (chosenDoctor.getPatientCount() > doctor.getPatientCount()) {

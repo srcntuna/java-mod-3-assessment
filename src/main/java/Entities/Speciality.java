@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -14,8 +16,8 @@ public class Speciality {
     private String name;
     private int numOfTreatmentsReq;
 
-    @JsonIgnore
-    private Set<Ailment> associatedAilments;
+
+    private Map<String, List<Object>> associatedDetails;
 
     public Speciality(){
 
@@ -23,10 +25,10 @@ public class Speciality {
 
 
 
-    public Speciality(String name, int numOfTreatmentsReq, Set<Ailment> associatedAilments) {
+    public Speciality(String name, int numOfTreatmentsReq, Map<String, List<Object>> associatedDetails) {
         this.name = name;
         this.numOfTreatmentsReq = numOfTreatmentsReq;
-        this.associatedAilments = associatedAilments;
+        this.associatedDetails = associatedDetails;
 
     }
 

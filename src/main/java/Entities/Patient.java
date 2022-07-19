@@ -14,7 +14,7 @@ public class Patient {
 
     private int patientID;
 
-    private Speciality speciality;
+    private String speciality;
     private boolean isHealed;
 
     public Patient(){
@@ -42,7 +42,7 @@ public class Patient {
         return ailment;
     }
 
-    public Speciality getSpeciality() {
+    public String getSpeciality() {
         return speciality;
     }
 

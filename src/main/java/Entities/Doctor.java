@@ -16,7 +16,7 @@ public class Doctor {
 
     private int healingPower;
 
-    private Speciality speciality;
+    private String speciality;
     private boolean registered;
 
     private List<Patient> patients;
@@ -27,7 +27,7 @@ public class Doctor {
 
 
 
-    public Doctor(String name, Speciality speciality) {
+    public Doctor(String name, String speciality) {
         this.name = name;
         this.speciality = speciality;
         this.registered = true;
@@ -42,7 +42,7 @@ public class Doctor {
         return name;
     }
 
-    public Speciality getSpeciality() {
+    public String getSpeciality() {
         return speciality;
     }
 

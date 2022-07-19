@@ -9,10 +9,7 @@ import Enums.RadiologyAilments;
 import Enums.Specialities;
 import InputServices.UserInputService;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class SpecialityBuilderService {
     private UserInputService userInputService;
@@ -32,7 +29,7 @@ public class SpecialityBuilderService {
 
         int option = Integer.parseInt(name);
 
-        Set<Ailment> associatedAilments = new HashSet();
+       List<Ailment> associatedAilments = new ArrayList<>();
         String nameOfSpeciality;
         int numOfTreatmentsReq;
 
@@ -58,7 +55,11 @@ public class SpecialityBuilderService {
             }
         }
 
-       Speciality newSpeciality = new Speciality(nameOfSpeciality,numOfTreatmentsReq,associatedAilments);
+        Map<String, List<Object>> associatedDetails = new HashMap<>();
+        associatedDetails.put("doctors",new ArrayList<>());
+        associatedDetails.put("ailments", Collections.singletonList(associatedAilments));
+
+       Speciality newSpeciality = new Speciality(nameOfSpeciality,numOfTreatmentsReq,associatedDetails);
 
         for(Ailment ailment : newSpeciality.getAssociatedAilments()){
             ailment.setSpeciality(newSpeciality);

@@ -13,7 +13,7 @@ public class Ailment {
 
     private String name;
 
-    private Speciality speciality;
+    private String speciality;
 
     public Ailment(){
 
@@ -21,7 +21,7 @@ public class Ailment {
 
 
 
-    public Ailment(int startingHealthIndex, String name, Speciality speciality) {
+    public Ailment(int startingHealthIndex, String name, String speciality) {
         this.startingHealthIndex = startingHealthIndex;
         this.name = name;
         this.speciality = speciality;
@@ -35,11 +35,11 @@ public class Ailment {
         this.startingHealthIndex = startingHealthIndex;
     }
 
-    public Speciality getSpeciality() {
+    public String getSpeciality() {
         return speciality;
     }
 
-    public void setSpeciality(Speciality speciality) {
+    public void setSpeciality(String speciality) {
         this.speciality = speciality;
     }
 

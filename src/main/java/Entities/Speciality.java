@@ -1,19 +1,32 @@
 package Entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.HashSet;
+import java.util.Set;
+
 
 public class Speciality {
 
     private String name;
     private int numOfTreatmentsReq;
 
-    private HashSet<Ailment> associatedAilments;
+    @JsonIgnore
+    private Set<Ailment> associatedAilments;
+
+    public Speciality(){
+
+    }
 
 
-    public Speciality(String name, int numOfTreatmentsReq) {
+
+    public Speciality(String name, int numOfTreatmentsReq, Set<Ailment> associatedAilments) {
         this.name = name;
         this.numOfTreatmentsReq = numOfTreatmentsReq;
-        this.associatedAilments = new HashSet<>();
+        this.associatedAilments = associatedAilments;
 
     }
 
@@ -35,7 +48,7 @@ public class Speciality {
         System.out.println(ailment+" has been added to speciality: "+name);
     }
 
-    public HashSet<Ailment> getAssociatedAilments() {
+    public Set<Ailment> getAssociatedAilments() {
         return associatedAilments;
     }
 }

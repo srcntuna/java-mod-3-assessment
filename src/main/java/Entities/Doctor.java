@@ -14,10 +14,10 @@ public class Doctor {
     private String name;
 
 
+    private int healingPower;
 
-    private String speciality;
+    private Speciality speciality;
     private boolean registered;
-
 
     private List<Patient> patients;
 
@@ -27,11 +27,13 @@ public class Doctor {
 
 
 
-    public Doctor(String name, String speciality) {
+    public Doctor(String name, Speciality speciality) {
         this.name = name;
         this.speciality = speciality;
         this.registered = true;
         this.patients = new ArrayList<>();
+        //random power from 5 to 30
+        this.healingPower = 5 + (int)(Math.random() * ((30 - 5) + 1));
 
 
     }
@@ -40,7 +42,7 @@ public class Doctor {
         return name;
     }
 
-    public String getSpeciality() {
+    public Speciality getSpeciality() {
         return speciality;
     }
 
@@ -61,9 +63,11 @@ public class Doctor {
         return patients;
     }
 
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
+    public void treatPatient(Patient patient){
+        patient.receiveTreatment(this.healingPower);
+
     }
+
 
     public void setRegistered(boolean registered) {
         this.registered = registered;

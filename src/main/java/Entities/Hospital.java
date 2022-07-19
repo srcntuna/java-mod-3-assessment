@@ -1,25 +1,36 @@
 package Entities;
 
+import Deserializer.ArrayToMapDeserializer;
+import Deserializer.MapToArraySerializer;
+import Deserializer.MyCustomDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.io.Serializable;
 import java.util.*;
 
 public class Hospital implements Serializable {
     private String name;
-    private Map<String, Set<Doctor>> specialtyToDoctors;
+
+    @JsonSerialize(using = MapToArraySerializer.class)
+    private Map<Speciality, Set<Doctor>> specialtyToDoctors;
+
 
     private int patientID;
 
-    private Map<Integer,Patient> allPatients;
+
 
     public Hospital(){
 
     }
 
+
+
     public Hospital(String name) {
         this.name = name;
         this.specialtyToDoctors = new HashMap<>();
-        this.allPatients = new HashMap<>();
-        this.patientID = 1;
+
+
     }
 
     public String getName() {
@@ -28,12 +39,15 @@ public class Hospital implements Serializable {
 
     public void addDoctor(Doctor doctor) {
 
-        String doctorSpeciality = doctor.getSpeciality();
+        Speciality doctorSpeciality = doctor.getSpeciality();
 
-        for(String speciality : specialtyToDoctors.keySet()){
-            if(speciality.equals(doctorSpeciality)  ){
+
+        for(Speciality speciality : specialtyToDoctors.keySet()){
+
+            if(speciality.equals(doctorSpeciality)){
+
                 specialtyToDoctors.get(speciality).add(doctor);
-                System.out.println(doctor.getName()+" has been added to " + speciality+" department");
+                System.out.println(doctor.getName()+" has been added to " + speciality.getName()+" department");
             }
         }
 
@@ -47,13 +61,17 @@ public class Hospital implements Serializable {
             System.out.println("Sorry no doctor exist in this speciality! Please go to another hospital");
             return;
         }
-        patient.setPatientID(patientID);
+
         chosenDoctor.addPatient(patient);
 
-        allPatients.put(patientID,patient);
-        patientID++;
-        System.out.println(patient.getName()+" has been to added to Doctor "+chosenDoctor.getName()+" list in "+chosenDoctor.getSpeciality()+" department");
 
+
+        System.out.println(patient.getName()+" has been to added to Doctor "+chosenDoctor.getName()+" list in "+chosenDoctor.getSpeciality().getName()+" department");
+
+    }
+
+    public Map<Speciality, Set<Doctor>> getSpecialtyToDoctors() {
+        return specialtyToDoctors;
     }
 
     public void removePatient(Patient patient){
@@ -78,19 +96,19 @@ public class Hospital implements Serializable {
 
         }
 
-        //from the whole list of patients
-        allPatients.remove(patient);
+
 
     }
 
     public void addSpeciality(Speciality speciality){
 
-        specialtyToDoctors.put(speciality.getName(),new HashSet<>());
+        specialtyToDoctors.put(speciality,new HashSet<>());
 
     }
 
 
     private Doctor findDoctorWithShortestQueue(Set<Doctor> doctors) {
+
 
 
         Doctor chosenDoctor = null;
@@ -109,13 +127,6 @@ public class Hospital implements Serializable {
         this.name = name;
     }
 
-    public Map<String, Set<Doctor>> getSpecialtyToDoctors() {
-        return specialtyToDoctors;
-    }
-
-    public void setSpecialtyToDoctors(Map<String, Set<Doctor>> specialtyToDoctors) {
-        this.specialtyToDoctors = specialtyToDoctors;
-    }
 
     public int getPatientID() {
         return patientID;
@@ -125,16 +136,11 @@ public class Hospital implements Serializable {
         this.patientID = patientID;
     }
 
-    public Map<Integer, Patient> getAllPatients() {
-        return allPatients;
-    }
 
-    public void setAllPatients(Map<Integer, Patient> allPatients) {
-        this.allPatients = allPatients;
-    }
+
 
     @Override
     public String toString() {
-        return "Hospital{" + "name='" + name + '\'' + ", specialtyToDoctors=" + specialtyToDoctors + ", patientID=" + patientID + ", allPatients=" + allPatients + '}';
+        return "Hospital{" + "name='" + name + '\'' + ", specialtyToDoctors=" + specialtyToDoctors + ", patientID=" + patientID +  '}';
     }
 }

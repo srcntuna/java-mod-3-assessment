@@ -12,10 +12,7 @@ public interface UserInputService extends AutoCloseable {
 
     int getUserIntegerInput(String prompt);
 
-    Ailment getAilment();
-    Speciality getSpeciality();
 
-    Patient getPatient(Map<Integer,Patient> patientList);
 
 
 }

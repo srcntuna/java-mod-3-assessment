@@ -14,12 +14,14 @@ public class Patient {
 
     private int patientID;
 
-    private String speciality;
+    private Speciality speciality;
     private boolean isHealed;
 
     public Patient(){
 
     }
+
+
 
     public Patient(String name, Ailment ailment) {
         this.name = name;
@@ -40,7 +42,7 @@ public class Patient {
         return ailment;
     }
 
-    public String getSpeciality() {
+    public Speciality getSpeciality() {
         return speciality;
     }
 
@@ -49,7 +51,10 @@ public class Patient {
             System.out.println("The patient is healed already!");
             return;
         }
+        System.out.println(this.name + " had "+this.healthIndex+" health index");
         this.healthIndex+=points;
+        System.out.println(this.name+" gaining "+points + " points....");
+        System.out.println(this.name+ " has "+this.healthIndex+" health index now!!!");
         if(this.healthIndex >= 100){
             System.out.println("HealthIndex is over 100 now. No longer treatment required. The patient is healed!");
             this.isHealed = true;
@@ -58,6 +63,13 @@ public class Patient {
     }
 
 
+    public boolean isHealed() {
+        return isHealed;
+    }
+
+    public void setHealed(boolean healed) {
+        isHealed = healed;
+    }
 
     public int getHealthIndex() {
         return healthIndex;

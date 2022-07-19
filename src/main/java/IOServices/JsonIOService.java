@@ -6,9 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class JsonIOService implements IOService {
 
@@ -34,12 +31,17 @@ public class JsonIOService implements IOService {
         Hospital restoredHospital = null;
         try{
 
-            restoredHospital = new ObjectMapper().readValue(new File( "hospital.json"), Hospital.class);
+            restoredHospital = new ObjectMapper().readValue(new File( fileName), Hospital.class);
 
         } catch (Exception e){
             e.printStackTrace();
             return null;
         }
         return restoredHospital;
+    }
+
+    @Override
+    public void close() throws Exception {
+        System.out.println("JSON file system is closed");
     }
 }

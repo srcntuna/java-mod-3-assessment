@@ -6,28 +6,56 @@ import InputServices.ScannerUserInputService;
 import InputServices.SysoutUserOutputService;
 import InputServices.UserInputService;
 import InputServices.UserOutputService;
+import SelectionServices.HospitalSelectionServices;
+import SelectionServices.DoctorSelectionService;
+import PatientServices.PatientServices;
+import Utils.HospitalTrackerService;
+
+import java.util.List;
 
 public class HospitalWorld {
     public static void main(String[] args) {
         UserOutputService userOutputService = new SysoutUserOutputService();
-        try (UserInputService userInputService = new ScannerUserInputService(userOutputService);) {
+        try (UserInputService userInputService = new ScannerUserInputService(userOutputService);HospitalTrackerService hospitalTracker = new HospitalTrackerService(); IOService jsonIOService = new JsonIOService();) {
 
-            HospitalSelectionServices hospitalSelectionServices = new HospitalSelectionServices(userInputService);
-            Hospital hospital = hospitalSelectionServices.selectHospital();
+            System.out.println("WELCOME!");
+            System.out.println("1.Select existing hospital");
+            System.out.println("2.Create a new hospital");
+            String optionStr = userInputService.getUserInput("....");
+            int optionNum = Integer.parseInt(optionStr);
+            List<String> hospitalList =  hospitalTracker.parseFile("hospitalList.csv");
+            Hospital currHospital;
+            PatientBuilderService patientBuilderService = null;
+            if(optionNum == 1 && hospitalList != null){
+
+                HospitalSelectionServices hospitalSelectionServices = new HospitalSelectionServices(userInputService,jsonIOService);
+                currHospital = hospitalSelectionServices.selectHospital(hospitalList);
+
+            }else{
+
+                HospitalBuilderService hospitalBuilderService = new HospitalBuilderService(userInputService);
+                Hospital newHospital = hospitalBuilderService.createHospital();
+                DoctorBuilderService doctorBuilderService = new DoctorBuilderService(userInputService,newHospital);
+                MultipleDoctorBuilder multipleDoctorBuilder = new MultipleDoctorBuilder(userInputService,doctorBuilderService);
+                multipleDoctorBuilder.createMultipleDoctors();
+                patientBuilderService = new PatientBuilderService(userInputService,newHospital);
+                MultiplePatientBuilder multiplePatientBuilder = new MultiplePatientBuilder(userInputService,patientBuilderService);
+                multiplePatientBuilder.createMultiplePatients();
+                currHospital = newHospital;
+                hospitalTracker.addToHospitalList(currHospital.getName());
+
+
+            }
 
             System.out.println("Hospital is ready!!");
 
-            PatientSelectionService patientSelectionService = new PatientSelectionService(userInputService);
-            PatientBuilderService patientBuilderService = new PatientBuilderService(userInputService);
-
-
-            PatientServices patientServices = new PatientServices(patientBuilderService,userInputService,patientSelectionService,hospital);
+            PatientServices patientServices = new PatientServices(patientBuilderService,userInputService,currHospital);
             patientServices.choosePatientService();
 
-            IOService ioService = new JsonIOService();
-            ioService.writeToFile("hospital.json",hospital);
+            hospitalTracker.writeToFile("hospitalList.csv",currHospital);
 
-            return;
+            jsonIOService.writeToFile(currHospital.getName()+".json",currHospital );
+
 
 
 

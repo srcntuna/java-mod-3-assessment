@@ -109,7 +109,7 @@ public class Hospital implements Serializable {
 
     private Doctor findDoctorWithShortestQueue(Set<Doctor> doctors) {
 
-
+        System.out.println(doctors);
 
         Doctor chosenDoctor = null;
         for (Doctor doctor : doctors) {

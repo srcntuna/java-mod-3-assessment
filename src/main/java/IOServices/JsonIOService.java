@@ -13,7 +13,7 @@ public class JsonIOService implements IOService {
 
   FileWriter fileWriter = null;
                 try {
-                    fileWriter = new FileWriter(fileName, true);
+                    fileWriter = new FileWriter(fileName, false);
                     String json = new ObjectMapper().writeValueAsString(hospital);
                     fileWriter.write(json);
                     fileWriter.close();

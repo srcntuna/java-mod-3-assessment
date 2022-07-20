@@ -1,8 +1,7 @@
 package BuilderServices;
 
 import Entities.*;
-import Enums.OptionService;
-import Enums.Specialities;
+
 import InputServices.UserInputService;
 import SelectionServices.AilmentSelectionService;
 
@@ -30,18 +29,33 @@ public class PatientBuilderService {
 
         List<Ailment> ailmentList = new ArrayList();
 
-        for(Speciality speciality : hospital.getSpecialtyToDoctors().keySet()){
+        for(Speciality speciality : hospital.getSpecialities()){
             Set<Ailment> ailmentsOfCurrSpeciality = speciality.getAssociatedAilments();
-            for(Ailment ailment : ailmentsOfCurrSpeciality){
-                ailmentList.add(ailment);
-            }
+            ailmentList.addAll(ailmentsOfCurrSpeciality);
         }
 
         Ailment ailment = ailmentSelectionService.selectAilment(ailmentList);
 
-        Patient patient = new Patient(name, ailment);
+        Doctor chosenDoctor = null;
 
-        hospital.addPatient(patient);
+        for(Speciality speciality : hospital.getSpecialities()){
+            if(speciality.getName().equals(ailment.getSpeciality())){
+                chosenDoctor = speciality.findDoctorWithShortestQueue();
+            }
+        }
+
+        Patient patient = new Patient(name);
+        int startingHealthIndex = ailment.getStartingHealthIndex();
+        patient.setHealthIndex(startingHealthIndex);
+
+        if(chosenDoctor == null){
+            System.out.println("Sorry there is no doctor in this department, please go to another hospital");
+            return null;
+
+        }
+        chosenDoctor.addPatient(patient);
+
+
 
         return patient;
     }

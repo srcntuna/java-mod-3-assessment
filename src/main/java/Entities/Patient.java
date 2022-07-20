@@ -6,30 +6,21 @@ import org.codehaus.jackson.annotate.JsonManagedReference;
 public class Patient {
     private String name;
 
-    private Ailment ailment;
-
-
 
     private int healthIndex;
 
-    private int patientID;
 
-    private String speciality;
     private boolean isHealed;
 
-    public Patient(){
+
+    private Patient(){
 
     }
 
-
-
-    public Patient(String name, Ailment ailment) {
+    public Patient(String name) {
         this.name = name;
-        this.speciality = ailment.getSpeciality();
-        this.ailment = ailment;
-        this.healthIndex = ailment.getStartingHealthIndex();
+        this.healthIndex = 0;
         this.isHealed = false;
-        this.patientID = 0;
 
     }
 
@@ -37,14 +28,27 @@ public class Patient {
         return name;
     }
 
-
-    public Ailment getAilment() {
-        return ailment;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSpeciality() {
-        return speciality;
+    public int getHealthIndex() {
+        return healthIndex;
     }
+
+    public void setHealthIndex(int healthIndex) {
+        this.healthIndex = healthIndex;
+    }
+
+    public boolean isHealed() {
+        return isHealed;
+    }
+
+    public void setHealed(boolean healed) {
+        isHealed = healed;
+    }
+
+
 
     public void receiveTreatment(int points){
         if(this.healthIndex >= 100){
@@ -60,27 +64,6 @@ public class Patient {
             this.isHealed = true;
         }
 
-    }
-
-
-    public boolean isHealed() {
-        return isHealed;
-    }
-
-    public void setHealed(boolean healed) {
-        isHealed = healed;
-    }
-
-    public int getHealthIndex() {
-        return healthIndex;
-    }
-
-    public int getPatientID() {
-        return patientID;
-    }
-
-    public void setPatientID(int patientID) {
-        this.patientID = patientID;
     }
 
 

@@ -16,7 +16,7 @@ public class Doctor {
 
     private int healingPower;
 
-    private String speciality;
+
     private boolean registered;
 
     private List<Patient> patients;
@@ -27,12 +27,11 @@ public class Doctor {
 
 
 
-    public Doctor(String name, String speciality) {
+    public Doctor(String name) {
         this.name = name;
-        this.speciality = speciality;
         this.registered = true;
         this.patients = new ArrayList<>();
-        //random power from 5 to 30
+
         this.healingPower = 5 + (int)(Math.random() * ((30 - 5) + 1));
 
 
@@ -42,9 +41,7 @@ public class Doctor {
         return name;
     }
 
-    public String getSpeciality() {
-        return speciality;
-    }
+
 
     public boolean isRegistered() {
         return registered;
@@ -54,13 +51,15 @@ public class Doctor {
         this.patients.add(patient);
     }
 
-    @JsonIgnore
-    public int getPatientCount() {
-        return this.patients.size();
-    }
+
 
     public List<Patient> getPatients() {
         return patients;
+    }
+
+    public void removePatient(Patient patient){
+        this.patients.remove(patient);
+        System.out.println(patient.getName()+" has been removed from the hospital...");
     }
 
     public void treatPatient(Patient patient){
@@ -77,5 +76,12 @@ public class Doctor {
         this.patients = patients;
     }
 
+    public int getHealingPower() {
+        return healingPower;
+    }
+
+    public void setHealingPower(int healingPower) {
+        this.healingPower = healingPower;
+    }
 
 }

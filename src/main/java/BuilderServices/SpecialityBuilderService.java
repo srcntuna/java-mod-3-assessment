@@ -29,7 +29,7 @@ public class SpecialityBuilderService {
 
         int option = Integer.parseInt(name);
 
-       List<Ailment> associatedAilments = new ArrayList<>();
+       Set<Ailment> associatedAilments = new HashSet<>();
         String nameOfSpeciality;
         int numOfTreatmentsReq;
 
@@ -38,32 +38,26 @@ public class SpecialityBuilderService {
             numOfTreatmentsReq = 5;
             for(CardiologyAilments ailment : CardiologyAilments.values()){
 
-                associatedAilments.add(new Ailment(70,ailment.name(),null));
+                associatedAilments.add(new Ailment(50,ailment.name(),Specialities.CARDIOLOGY.name()));
             }
         }else if(option == 2){
             nameOfSpeciality = Specialities.DERMATOLOGY.name();
             numOfTreatmentsReq = 3;
             for(DermatologyAilments ailment : DermatologyAilments.values()){
-                associatedAilments.add(new Ailment(70,ailment.name(),null));
+                associatedAilments.add(new Ailment(70,ailment.name(),Specialities.DERMATOLOGY.name()));
             }
             
         }else{
             nameOfSpeciality = Specialities.RADIOLOGY.name();
             numOfTreatmentsReq = 7;
             for(RadiologyAilments ailment : RadiologyAilments.values()){
-                associatedAilments.add(new Ailment(70,ailment.name(),null));
+                associatedAilments.add(new Ailment(30,ailment.name(),Specialities.RADIOLOGY.name()));
             }
         }
 
-        Map<String, List<Object>> associatedDetails = new HashMap<>();
-        associatedDetails.put("doctors",new ArrayList<>());
-        associatedDetails.put("ailments", Collections.singletonList(associatedAilments));
 
-       Speciality newSpeciality = new Speciality(nameOfSpeciality,numOfTreatmentsReq,associatedDetails);
+       Speciality newSpeciality = new Speciality(nameOfSpeciality,numOfTreatmentsReq,associatedAilments);
 
-        for(Ailment ailment : newSpeciality.getAssociatedAilments()){
-            ailment.setSpeciality(newSpeciality);
-        }
 
         return newSpeciality;
         

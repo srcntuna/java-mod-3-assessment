@@ -15,6 +15,8 @@ public class Ailment {
 
     private String speciality;
 
+
+
     public Ailment(){
 
     }
@@ -25,6 +27,7 @@ public class Ailment {
         this.startingHealthIndex = startingHealthIndex;
         this.name = name;
         this.speciality = speciality;
+
     }
 
     public int getStartingHealthIndex() {
@@ -42,6 +45,7 @@ public class Ailment {
     public void setSpeciality(String speciality) {
         this.speciality = speciality;
     }
+
 
     public String getName() {
         return name;

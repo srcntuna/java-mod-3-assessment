@@ -30,6 +30,7 @@ public class HospitalWorld {
 
                 HospitalSelectionServices hospitalSelectionServices = new HospitalSelectionServices(userInputService,jsonIOService);
                 currHospital = hospitalSelectionServices.selectHospital(hospitalList);
+                patientBuilderService = new PatientBuilderService(userInputService,currHospital);
 
             }else{
 

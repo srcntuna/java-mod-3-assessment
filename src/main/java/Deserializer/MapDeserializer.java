@@ -6,9 +6,3 @@ import com.fasterxml.jackson.databind.KeyDeserializer;
 
 import java.io.IOException;
 
-public class MapDeserializer extends KeyDeserializer {
-    @Override
-    public Speciality deserializeKey(String key, DeserializationContext ctxt) throws IOException {
-        return new Speciality(key);
-    }
-}

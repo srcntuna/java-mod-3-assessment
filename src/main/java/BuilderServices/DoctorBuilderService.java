@@ -29,9 +29,9 @@ public class DoctorBuilderService {
         Speciality speciality = specialityBuilderService.createSpeciality();
         hospital.addSpeciality(speciality);
 
-        Doctor newDoctor = new Doctor(name,speciality);
+        Doctor newDoctor = new Doctor(name);
 
-        hospital.addDoctor(newDoctor);
+        speciality.addDoctor(newDoctor);
 
         return newDoctor;
     }

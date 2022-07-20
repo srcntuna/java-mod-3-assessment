@@ -12,6 +12,8 @@ import SelectionServices.DoctorSelectionService;
 import SelectionServices.PatientSelectionService;
 import SelectionServices.SpecialitySelectionService;
 
+import javax.print.Doc;
+
 public class PatientServices {
 
     private PatientBuilderService patientBuilderService;
@@ -53,11 +55,18 @@ public class PatientServices {
 
             }else if(optionNum == 2) {
 
-                Speciality chosenSpeciality = specialitySelectionService.selectSpeciality(hospital.getSpecialtyToDoctors().keySet());
+                
+                Speciality chosenSpeciality = specialitySelectionService.selectSpeciality(hospital.getSpecialities());
 
-                Doctor chosenDoctor = doctorSelectionService.selectDoctor(hospital.getSpecialtyToDoctors().get(chosenSpeciality));
-
-                Patient chosenPatient = patientSelectionService.selectPatient(chosenDoctor.getPatients());
+                Doctor chosenDoctor = null;
+                Patient chosenPatient = null;
+                
+                for(Speciality speciality : hospital.getSpecialities()){
+                    if(speciality.equals(chosenSpeciality)){
+                        chosenDoctor = doctorSelectionService.selectDoctor(speciality.getDoctors());
+                        chosenPatient = patientSelectionService.selectPatient(chosenDoctor.getPatients());
+                    }
+                }
 
                 if(chosenPatient == null){
                     choosePatientService();
@@ -69,7 +78,7 @@ public class PatientServices {
                 boolean isHealed = chosenPatient.isHealed();
 
                 if(isHealed){
-                    hospital.removePatient(chosenPatient);
+                    chosenDoctor.removePatient(chosenPatient);
                 }
 
             }else if(optionNum == 3){

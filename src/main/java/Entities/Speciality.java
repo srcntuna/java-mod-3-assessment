@@ -77,4 +77,8 @@ public class Speciality {
         return chosenDoctor;
     }
 
+    @Override
+    public String toString() {
+        return "Speciality{" + "name='" + name + '\'' + ", numOfTreatmentsReq=" + numOfTreatmentsReq + ", associatedAilments=" + associatedAilments + ", doctors=" + doctors + '}';
+    }
 }

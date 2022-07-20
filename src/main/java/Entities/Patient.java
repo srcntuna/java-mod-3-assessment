@@ -66,5 +66,8 @@ public class Patient {
 
     }
 
-
+    @Override
+    public String toString() {
+        return "Patient{" + "name='" + name + '\'' + ", healthIndex=" + healthIndex + ", isHealed=" + isHealed + '}';
+    }
 }

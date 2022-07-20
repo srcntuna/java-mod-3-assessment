@@ -57,7 +57,7 @@ public class HospitalWorld {
 
             jsonIOService.writeToFile(currHospital.getName()+".json",currHospital );
 
-
+            System.out.println(currHospital.toString());
 
 
 

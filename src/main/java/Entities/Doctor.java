@@ -84,4 +84,8 @@ public class Doctor {
         this.healingPower = healingPower;
     }
 
+    @Override
+    public String toString() {
+        return "Doctor{" + "name='" + name + '\'' + ", healingPower=" + healingPower + ", registered=" + registered + ", patients=" + patients + '}';
+    }
 }
